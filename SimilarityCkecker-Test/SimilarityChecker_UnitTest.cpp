@@ -26,4 +26,7 @@ TEST_F(SimilarityCheckerFixture, ThrowExceptionInvalidCase1) {
 TEST_F(SimilarityCheckerFixture, ThrowExceptionInvalidCase2) {
 	assertIllegalArgument("CCD","C1CD");
 }
+TEST_F(SimilarityCheckerFixture, ReturnCheckWhenCallgetSameLength) {
+	EXPECT_EQ(60, similarityChecker.getLengthPoint("AAA", "BBB"));
+}
 

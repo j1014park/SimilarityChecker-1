@@ -1,5 +1,7 @@
 #include <string>
 #include <stdexcept>
+
+
 using namespace std;
 class SimilarityChecker
 {
@@ -22,6 +24,12 @@ public:
 		return point;
 	}
 
-private:
+	int getLengthPoint(const string& firstString, const string& secondString)
+	{
+		if (firstString.length() == secondString.length()) return 60;
+	}
 
+private:
+	string longString;
+	string shortString;
 };
