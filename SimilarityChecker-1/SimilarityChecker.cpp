@@ -29,7 +29,7 @@ public:
 	{
 		if (longsize / shortsize >= 2)
 			return 0;
-		return (1 - (longsize - shortsize) / shortsize) * 60;
+		return (1 - (longsize - shortsize) / shortsize) * MAX_LENGTH_SCORE;
 	}
 
 	void calcLongShort(const string& firstString, const string& secondString)
@@ -48,7 +48,7 @@ public:
 
 	double getLengthPoint(const string& firstString, const string& secondString)
 	{
-		if (firstString.size() == secondString.size()) return 60;
+		if (firstString.size() == secondString.size()) return MAX_LENGTH_SCORE;
 		calcLongShort(firstString, secondString);
 		return calcLengthPoint(shortString.size(), longString.size());
 	}
@@ -56,4 +56,5 @@ public:
 private:
 	string longString;
 	string shortString;
+	static int MAX_LENGTH_SCORE = 60;
 };
