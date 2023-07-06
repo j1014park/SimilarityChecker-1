@@ -58,13 +58,14 @@ public:
 		return calcLengthPoint(shortString.size(), longString.size());
 	}
 
-	double getAlphabatPoint(const string& firstString, const string& secondString)
+	double calcAlphabatScore(double sameCnt, double totalCnt)
 	{
-		//µîÀåÇÏ´Â ¾ËÆÄºª °¹¼ö
-		int firstAlpha = 0;
-		int secondAlpha = 0;
-		map<char,int> sameChar;
-		map<char,int> uniqueChar;
+		return (sameCnt / totalCnt) * 40;
+	}
+
+	void countChar(const string& firstString, const string& secondString)
+	{
+
 		sameChar.clear();
 		uniqueChar.clear();
 		for (const char first : firstString)
@@ -84,15 +85,18 @@ public:
 				}
 			}
 		}
+	}
 
-		double sameCnt = sameChar.size();
-		double totalCnt = uniqueChar.size();
-
-		return (sameCnt/totalCnt)*40;
+	double getAlphabatPoint(const string& firstString, const string& secondString)
+	{
+		countChar(firstString, secondString);
+		return calcAlphabatScore(sameChar.size(), uniqueChar.size());
 	}
 
 private:
 	string longString;
 	string shortString;
 	const int MAX_LENGTH_SCORE = 60;
+	map<char, int> sameChar;
+	map<char, int> uniqueChar;
 };
