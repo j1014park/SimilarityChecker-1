@@ -1,6 +1,9 @@
 #include <string>
 #include <stdexcept>
 
+#include <map>
+
+
 
 using namespace std;
 
@@ -17,11 +20,13 @@ public:
 		}
 	}
 
-	int getPoint(const string& firstString, const string& secondString)
+	double getPoint(const string& firstString, const string& secondString)
 	{
-		int point = 0;
+		double point = 0;
 		assertIllegalArgument(firstString);
 		assertIllegalArgument(secondString);
+		point += getLengthPoint(firstString, secondString);
+
 		return point;
 	}
 
@@ -53,8 +58,45 @@ public:
 		return calcLengthPoint(shortString.size(), longString.size());
 	}
 
+	double calcAlphabatScore(double sameCnt, double totalCnt)
+	{
+		return (sameCnt / totalCnt) * 40;
+	}
+
+	void countChar(const string& firstString, const string& secondString)
+	{
+
+		sameChar.clear();
+		uniqueChar.clear();
+		for (const char first : firstString)
+		{
+			for (const char second : secondString)
+			{
+				if(first == second)
+				{
+					sameChar.insert(pair<char, int>{first, 1});
+					uniqueChar.insert(pair<char, int>{first, 1});
+				}
+
+				if(first != second)
+				{					
+					uniqueChar.insert(pair<char, int>{first, 1});
+					uniqueChar.insert(pair<char, int>{second, 1});
+				}
+			}
+		}
+	}
+
+	double getAlphabatPoint(const string& firstString, const string& secondString)
+	{
+		countChar(firstString, secondString);
+		return calcAlphabatScore(sameChar.size(), uniqueChar.size());
+	}
+
 private:
 	string longString;
 	string shortString;
-	static int MAX_LENGTH_SCORE = 60;
+	const int MAX_LENGTH_SCORE = 60;
+	map<char, int> sameChar;
+	map<char, int> uniqueChar;
 };
