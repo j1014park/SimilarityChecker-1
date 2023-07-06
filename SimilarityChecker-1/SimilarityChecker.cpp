@@ -3,6 +3,7 @@
 
 
 using namespace std;
+
 class SimilarityChecker
 {
 public:
@@ -24,9 +25,30 @@ public:
 		return point;
 	}
 
-	int getLengthPoint(const string& firstString, const string& secondString)
+	double calcLengthPoint(double shortsize, double longsize)
 	{
-		if (firstString.length() == secondString.length()) return 60;
+		return (1 - (longsize - shortsize) / shortsize) * 60;
+	}
+
+	void calcLongShort(const string& firstString, const string& secondString)
+	{
+		if (firstString.size() <= secondString.size())
+		{
+			longString = secondString;
+			shortString = firstString;
+		}
+		else
+		{
+			longString = firstString;
+			shortString = secondString;
+		}
+	}
+
+	double getLengthPoint(const string& firstString, const string& secondString)
+	{
+		if (firstString.size() == secondString.size()) return 60;
+		calcLongShort(firstString, secondString);
+		return calcLengthPoint(shortString.size(), longString.size());
 	}
 
 private:
