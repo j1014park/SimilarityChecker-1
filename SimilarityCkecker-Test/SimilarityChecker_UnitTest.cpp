@@ -31,7 +31,11 @@ TEST_F(SimilarityCheckerFixture, ReturnCheckWhenCallgetSameLength) {
 	EXPECT_EQ(60, similarityChecker.getLengthPoint("AAA", "BBB"));
 }
 
-TEST_F(SimilarityCheckerFixture, ReturnCheckWhenCallgetLength3_4) {
+TEST_F(SimilarityCheckerFixture, ReturnCheckWhenCallgetLength2_3) {
 	EXPECT_EQ(30, similarityChecker.getLengthPoint("AA", "BBD"));
+}
+
+TEST_F(SimilarityCheckerFixture, ReturnCheckWhenCallgetLength2_4) {
+	EXPECT_EQ(0, similarityChecker.getLengthPoint("AA", "BBDD"));
 }
 

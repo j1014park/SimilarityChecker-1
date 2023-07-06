@@ -27,6 +27,8 @@ public:
 
 	double calcLengthPoint(double shortsize, double longsize)
 	{
+		if (longsize / shortsize >= 2)
+			return 0;
 		return (1 - (longsize - shortsize) / shortsize) * 60;
 	}
 
